@@ -16,18 +16,7 @@ const config: GatsbyConfig = {
       resolve: "@ninetailed/experience.js-gatsby",
       options: {
         clientId: process.env.NINETAILED_CLIENT_ID,
-        environment: process.env.NINETAILED_CLIENT_ID || "main",
-        ninetailedPlugins: [
-          // If using the preview widget
-          {
-            resolve: `@ninetailed/experience.js-plugin-preview`,
-            options: {
-              clientId: process.env.NINETAILED_PREVIEW_CLIENT_ID,
-              secret: process.env.NINETAILED_PREVIEW_SECRET,
-              environment: process.env.NINETAILED_CLIENT_ID || "main",
-            },
-          },
-        ],
+        environment: process.env.NINETIALED_ENV || "main",
       },
     },
     {

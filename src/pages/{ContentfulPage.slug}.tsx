@@ -5,8 +5,7 @@ import { Experience } from "@ninetailed/experience.js-gatsby";
 import Hero from "../components/Hero";
 
 export default function Page(props: any) {
-  const { contentfulComposePage } = props.data;
-  const { content } = contentfulComposePage;
+  const { contentfulPage } = props.data;
 
   function mapExperiences(experiences: any) {
     return (experiences || [])
@@ -17,16 +16,16 @@ export default function Page(props: any) {
   return (
     <div>
       <div style={{ fontSize: "1.5em" }}>
-        <pre>You've visited the {contentfulComposePage.slug} page!</pre>
+        <pre>You've visited the {contentfulPage.slug} page!</pre>
         <pre>
-          There are {content.sections.length} sections on this entry,{" "}
-          {content.sections.filter(
+          There are {contentfulPage.sections.length} sections on this entry,{" "}
+          {contentfulPage.sections.filter(
             (section: any) => section.sys?.contentType.sys.id === "hero"
           ).length || "none"}{" "}
           of which is a Hero section.
         </pre>
       </div>
-      {content.sections.map((section: any) => {
+      {contentfulPage.sections.map((section: any) => {
         if (section.sys?.contentType.sys.id === "hero") {
           console.log(section.nt_experiences);
           const mappedExperiences = mapExperiences(section.nt_experiences);
@@ -46,18 +45,15 @@ export default function Page(props: any) {
 }
 
 export const query = graphql`
-  query ComposePageContent($slug: String!) {
-    contentfulComposePage(slug: { eq: $slug }) {
+  query PageContent($slug: String!) {
+    contentfulPage(slug: { eq: $slug }) {
       name
-      title
       slug
-      content {
-        sections {
-          ... on ContentfulHero {
-            ...ContentfulHeroContent
-            nt_experiences {
-              ...ExperienceContent
-            }
+      sections {
+        ... on ContentfulHero {
+          ...ContentfulHeroContent
+          nt_experiences {
+            ...ExperienceContent
           }
         }
       }
