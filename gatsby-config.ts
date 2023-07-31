@@ -16,7 +16,7 @@ const config: GatsbyConfig = {
       resolve: "@ninetailed/experience.js-gatsby",
       options: {
         clientId: process.env.NINETAILED_CLIENT_ID,
-        environment: process.env.NINETIALED_ENV || "main",
+        environment: process.env.NINETAILED_ENV || "main",
       },
     },
     {

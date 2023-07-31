@@ -27,12 +27,10 @@ export default function Page(props: any) {
       </div>
       {contentfulPage.sections.map((section: any) => {
         if (section.sys?.contentType.sys.id === "hero") {
-          console.log(section.nt_experiences);
           const mappedExperiences = mapExperiences(section.nt_experiences);
           return (
             <Experience
               {...section}
-              id={section.id}
               key={section.id}
               experiences={mappedExperiences}
               component={Hero}
