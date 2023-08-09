@@ -57,16 +57,11 @@ const config: GatsbyConfig = {
               // Callback to handle user forwarding to the experience entry
               // in your CMS  - optional
               onOpenExperienceEditor: (experience: ExperienceConfiguration) => {
-                if (process.env.GATSBY_CONTENTFUL_SPACE) {
-                  window.open(
-                    `https://app.contentful.com/spaces/${
-                      process.env.GATSBY_CONTENTFUL_SPACE
-                    }/environments/${
-                      process.env.GATSBY_CONTENTFUL_ENVIRONMENT || "master"
-                    }/entries/${experience.id}`,
-                    "_blank"
-                  );
-                }
+                // TODO: For now, hard code your space ID and environment ID rather than trying to pull them from
+                window.open(
+                  `https://app.contentful.com/spaces/[YOUR_CONETNTFUL_SPACE_ID]/environments/[YOUR_CONTENTFUL_ENVIRONMENT_ID]/entries/${experience.id}`,
+                  "_blank"
+                );
               },
             },
           },
