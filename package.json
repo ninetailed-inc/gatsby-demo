@@ -16,10 +16,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ninetailed/experience.js-gatsby": "^4.2.3",
-    "@ninetailed/experience.js-plugin-preview": "^4.2.3",
-    "@ninetailed/experience.js-utils": "^4.2.3",
+    "@ninetailed/experience.js-gatsby": "4.2.6",
+    "@ninetailed/experience.js-plugin-google-tagmanager": "4.2.6",
+    "@ninetailed/experience.js-plugin-preview": "4.2.6",
+    "@ninetailed/experience.js-utils": "4.2.6",
+    "add": "^2.0.6",
     "gatsby": "^5.11.0",
+    "gatsby-plugin-google-tagmanager": "^5.11.0",
     "gatsby-plugin-image": "^3.8.0",
     "gatsby-plugin-manifest": "^5.11.0",
     "gatsby-plugin-sharp": "^5.11.0",
@@ -28,7 +31,8 @@
     "gatsby-source-filesystem": "^5.11.0",
     "gatsby-transformer-sharp": "^5.11.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@types/node": "^18.15.3",
