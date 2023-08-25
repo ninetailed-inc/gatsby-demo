@@ -19,6 +19,7 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    "gatsby-plugin-netlify",
     {
       resolve: "gatsby-source-contentful",
       options: {
