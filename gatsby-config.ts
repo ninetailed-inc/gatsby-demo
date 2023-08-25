@@ -1,5 +1,6 @@
-import { ExperienceConfiguration } from "@ninetailed/experience.js-gatsby";
 import type { GatsbyConfig } from "gatsby";
+import netlifyAdapter from "gatsby-adapter-netlify";
+import { ExperienceConfiguration } from "@ninetailed/experience.js-gatsby";
 import {
   audienceQuery,
   audienceMapper,
@@ -10,6 +11,7 @@ import {
 require("dotenv").config();
 
 const config: GatsbyConfig = {
+  adapter: netlifyAdapter(),
   siteMetadata: {
     title: `marketing-contentful-gatsby`,
     siteUrl: `https://www.yourdomain.tld`,
