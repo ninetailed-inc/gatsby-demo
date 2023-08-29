@@ -127,15 +127,10 @@ const config: GatsbyConfig = {
             resolve: `@ninetailed/experience.js-plugin-preview`,
             name: "@ninetailed/experience.js-plugin-preview",
             options: {
-              // Options specific to Gatsby - optional
               customOptions: {
-                // Query all audiences
                 audienceQuery,
-                // Mapper function for audiences
                 audienceMapper,
-                // Query all experiences
                 experienceQuery,
-                // Mapper function for experiences
                 experienceMapper,
               },
 
