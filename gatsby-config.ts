@@ -2,9 +2,11 @@ import type { GatsbyConfig } from "gatsby";
 import netlifyAdapter from "gatsby-adapter-netlify";
 import { ExperienceConfiguration } from "@ninetailed/experience.js-gatsby";
 import {
-  ExperienceLike,
-  ExperienceMapper,
-} from "@ninetailed/experience.js-utils";
+  audienceQuery,
+  audienceMapper,
+  experienceQuery,
+  experienceMapper,
+} from "./lib/preview";
 
 require("dotenv").config();
 
@@ -43,76 +45,10 @@ const config: GatsbyConfig = {
             name: "@ninetailed/experience.js-plugin-preview",
             options: {
               customOptions: {
-                audienceQuery: `
-                query NinetailedAudienceQuery {
-                  allContentfulNinetailedAudience {
-                    edges {
-                      node {
-                        id: nt_audience_id
-                        name: nt_name
-                        description: nt_description {
-                          nt_description
-                        }
-                      }
-                    }
-                  }
-                }
-              `,
-                audienceMapper: (audienceData: any) => {
-                  return audienceData.allContentfulNinetailedAudience.edges.map(
-                    (audience: any) => {
-                      return {
-                        id: audience.node.id,
-                        name: audience.node.name,
-                        description: audience.node.description?.nt_description,
-                      };
-                    }
-                  );
-                },
-                experienceQuery: `
-                query NinetailedPreviewExperiencesQuery {
-                  allContentfulNinetailedExperience {
-                    edges {
-                      node {
-                        id: contentful_id
-                        audience: nt_audience {
-                          id: contentful_id
-                          name: nt_name
-                        }
-                        config: nt_config {
-                          distribution
-                          traffic
-                          components {
-                            baseline {
-                              id
-                            }
-                            variants {
-                              hidden
-                              id
-                            }
-                          }
-                        }
-                        name: nt_name
-                        type: nt_type
-                        variants: nt_variants {
-                          ... on ContentfulEntry {
-                            id: contentful_id
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              `,
-                experienceMapper: (experienceData: any) => {
-                  return experienceData.allContentfulNinetailedExperience.edges
-                    .filter(({ node }: { node: any }) =>
-                      ExperienceMapper.isExperienceEntry(node)
-                    )
-                    .map(({ node }: { node: ExperienceLike }) =>
-                      ExperienceMapper.mapExperience(node)
-                    );
-                },
+                audienceQuery,
+                experienceQuery,
+                audienceMapper,
+                experienceMapper,
               },
 
               // Callback to handle user forwarding to the experience entry
