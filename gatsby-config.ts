@@ -8,90 +8,6 @@ import {
 
 require("dotenv").config();
 
-type GatsbyAudienceNode = {
-  node: {
-    id: string;
-    name: string;
-    description: {
-      nt_description?: string;
-    };
-  };
-};
-
-export const audienceQuery = `
-    query NinetailedAudienceQuery {
-      allContentfulNinetailedAudience {
-        edges {
-          node {
-            id: nt_audience_id
-            name: nt_name
-            description: nt_description {
-              nt_description
-            }
-          }
-        }
-      }
-    }
-  `;
-
-export const audienceMapper = (audienceData: any) => {
-  return audienceData.allContentfulNinetailedAudience.edges.map(
-    (audience: GatsbyAudienceNode) => {
-      return {
-        id: audience.node.id,
-        name: audience.node.name,
-        description: audience.node.description?.nt_description,
-      };
-    }
-  );
-};
-
-export const experienceQuery = `
-    query NinetailedPreviewExperiencesQuery {
-      allContentfulNinetailedExperience {
-        edges {
-          node {
-            id: contentful_id
-            audience: nt_audience {
-              id: contentful_id
-              name: nt_name
-            }
-            config: nt_config {
-              distribution
-              traffic
-              components {
-                baseline {
-                  id
-                }
-                variants {
-                  hidden
-                  id
-                }
-              }
-            }
-            name: nt_name
-            type: nt_type
-            variants: nt_variants {
-              ... on ContentfulEntry {
-                id: contentful_id
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
-export const experienceMapper = (experienceData: any) => {
-  return experienceData.allContentfulNinetailedExperience.edges
-    .filter(({ node }: { node: any }) =>
-      ExperienceMapper.isExperienceEntry(node)
-    )
-    .map(({ node }: { node: ExperienceLike }) =>
-      ExperienceMapper.mapExperience(node)
-    );
-};
-
 const config: GatsbyConfig = {
   adapter: netlifyAdapter(),
   siteMetadata: {
@@ -103,7 +19,6 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
-    "gatsby-plugin-netlify",
     {
       resolve: "gatsby-source-contentful",
       options: {
@@ -128,10 +43,76 @@ const config: GatsbyConfig = {
             name: "@ninetailed/experience.js-plugin-preview",
             options: {
               customOptions: {
-                audienceQuery,
-                audienceMapper,
-                experienceQuery,
-                experienceMapper,
+                audienceQuery: `
+                query NinetailedAudienceQuery {
+                  allContentfulNinetailedAudience {
+                    edges {
+                      node {
+                        id: nt_audience_id
+                        name: nt_name
+                        description: nt_description {
+                          nt_description
+                        }
+                      }
+                    }
+                  }
+                }
+              `,
+                audienceMapper: (audienceData: any) => {
+                  return audienceData.allContentfulNinetailedAudience.edges.map(
+                    (audience: any) => {
+                      return {
+                        id: audience.node.id,
+                        name: audience.node.name,
+                        description: audience.node.description?.nt_description,
+                      };
+                    }
+                  );
+                },
+                experienceQuery: `
+                query NinetailedPreviewExperiencesQuery {
+                  allContentfulNinetailedExperience {
+                    edges {
+                      node {
+                        id: contentful_id
+                        audience: nt_audience {
+                          id: contentful_id
+                          name: nt_name
+                        }
+                        config: nt_config {
+                          distribution
+                          traffic
+                          components {
+                            baseline {
+                              id
+                            }
+                            variants {
+                              hidden
+                              id
+                            }
+                          }
+                        }
+                        name: nt_name
+                        type: nt_type
+                        variants: nt_variants {
+                          ... on ContentfulEntry {
+                            id: contentful_id
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              `,
+                experienceMapper: (experienceData: any) => {
+                  return experienceData.allContentfulNinetailedExperience.edges
+                    .filter(({ node }: { node: any }) =>
+                      ExperienceMapper.isExperienceEntry(node)
+                    )
+                    .map(({ node }: { node: ExperienceLike }) =>
+                      ExperienceMapper.mapExperience(node)
+                    );
+                },
               },
 
               // Callback to handle user forwarding to the experience entry
