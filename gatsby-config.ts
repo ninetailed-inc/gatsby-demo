@@ -35,6 +35,13 @@ const config: GatsbyConfig = {
       },
     },
     {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: process.env.GATSBY_GTM_ID,
+        includeInDevelopment: true,
+      },
+    },
+    {
       resolve: "@ninetailed/experience.js-gatsby",
       options: {
         clientId: process.env.NINETAILED_CLIENT_ID,
@@ -59,6 +66,16 @@ const config: GatsbyConfig = {
                   `https://app.contentful.com/spaces/[YOUR_CONETNTFUL_SPACE_ID]/environments/[YOUR_CONTENTFUL_ENVIRONMENT_ID]/entries/${experience.id}`,
                   "_blank"
                 );
+              },
+            },
+          },
+          {
+            resolve: `@ninetailed/experience.js-plugin-google-tagmanager`,
+            name: "@ninetailed/experience.js-plugin-google-tagmanager",
+            // FIXME: Custom payload format?
+            options: {
+              template: {
+                ninetailed_audience_name: "{{ audience.name }}",
               },
             },
           },

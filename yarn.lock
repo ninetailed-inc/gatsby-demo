@@ -5836,7 +5836,7 @@ gatsby-parcel-config@1.12.0:
     "@parcel/transformer-js" "2.8.3"
     "@parcel/transformer-json" "2.8.3"
 
-gatsby-plugin-google-tagmanager@^5.11.0:
+gatsby-plugin-google-tagmanager@^5.12.0:
   version "5.12.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-5.12.0.tgz#dd2fe47a7cd2a3f39021dc7ce29e5ce815de5954"
   integrity sha512-W4lRhKF5ydAnoA4zBpKh8dp/8WLMbrRjkJdf5cxpoC49DdMjC5Dl1VoQEN2xpmhfYqcy7fweEdyVR9M9UJVQKQ==
@@ -5864,7 +5864,7 @@ gatsby-plugin-image@^3.8.0:
     objectFitPolyfill "^2.3.5"
     prop-types "^15.8.1"
 
-gatsby-plugin-manifest@^5.11.0:
+gatsby-plugin-manifest@^5.12.0:
   version "5.12.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-5.12.0.tgz#597ccc639c4bd1d35c8d20358ea9e52ed156ab9a"
   integrity sha512-M4tq4AX4yVNUQnYQ5SI1ba/Khqof4PtyVtIpzzGE82O53Jg3M5AWZ0KGcz+d3UFdw1PGXYF+UtTzPlzMiTTeEg==
@@ -5905,7 +5905,7 @@ gatsby-plugin-page-creator@^5.12.0:
     globby "^11.1.0"
     lodash "^4.17.21"
 
-gatsby-plugin-sharp@^5.11.0:
+gatsby-plugin-sharp@^5.12.0:
   version "5.12.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-5.12.0.tgz#a88a35895c70500b487699b0cc9a21aa58f440c5"
   integrity sha512-of9E26/eLenTgNUjzFYJGbwIIGoXRCOCA1Dsz7dKvcx11b0pNf27C65AiEWPudWXHl+OUjFX/bNNBBooqN+nlg==
@@ -6028,7 +6028,7 @@ gatsby-source-contentful@^8.11.0:
     semver "^7.5.3"
     url "^0.11.1"
 
-gatsby-source-filesystem@^5.11.0, gatsby-source-filesystem@^5.12.0:
+gatsby-source-filesystem@^5.12.0:
   version "5.12.0"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-5.12.0.tgz#5f970fccc3102a4c62d99575c55a2a167912bb02"
   integrity sha512-0BZkgADBu56vTzZ6TLvrMXhp8MzpEqvtpsI+VRtNTlsu6ULaHRjoMClomlAqWecjBXTkujhwpSjnIfEmpmCaLQ==
@@ -6061,7 +6061,7 @@ gatsby-telemetry@^4.12.0:
     lodash "^4.17.21"
     node-fetch "^2.6.11"
 
-gatsby-transformer-sharp@^5.11.0:
+gatsby-transformer-sharp@^5.12.0:
   version "5.12.0"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-5.12.0.tgz#50c7cd7384b0d28f908eaf96f21653d2ad38e43a"
   integrity sha512-nx7taigcXEcvhWVaLTWaox+UwbD7bomwbY3kw7XAE5nEYlAlMVgnpY+L3KlE3bmMoNx5afXIrSWa3Ufaip4/9w==
