@@ -72,7 +72,6 @@ const config: GatsbyConfig = {
           {
             resolve: `@ninetailed/experience.js-plugin-google-tagmanager`,
             name: "@ninetailed/experience.js-plugin-google-tagmanager",
-            // FIXME: Custom payload format?
             options: {
               template: {
                 ninetailed_audience_name: "{{ audience.name }}",

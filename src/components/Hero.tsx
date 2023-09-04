@@ -40,6 +40,7 @@ export const query = graphql`
     type: nt_type
     audience: nt_audience {
       id: contentful_id
+      name: nt_name
     }
     config: nt_config {
       components {
