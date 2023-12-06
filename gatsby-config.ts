@@ -78,6 +78,10 @@ const config: GatsbyConfig = {
               },
             },
           },
+          {
+            resolve: `@ninetailed/experience.js-plugin-insights`,
+            options: {},
+          },
         ],
       },
     },
