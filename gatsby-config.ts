@@ -46,6 +46,21 @@ const config: GatsbyConfig = {
       options: {
         clientId: process.env.NINETAILED_CLIENT_ID,
         environment: process.env.NINETAILED_ENV || "main",
+        onInitProfileId: (profileId?: string) => {
+          if (profileId) {
+            return profileId;
+          }
+          const cookieObject = document.cookie
+            .split(";")
+            .map((v) => v.split("="))
+            .reduce<Record<string, string>>((acc, v) => {
+              acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(
+                v[1].trim()
+              );
+              return acc;
+            }, {});
+          return cookieObject["_ga"];
+        },
         ninetailedPlugins: [
           {
             resolve: `@ninetailed/experience.js-plugin-preview`,
