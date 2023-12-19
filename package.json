@@ -16,12 +16,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ninetailed/experience.js-gatsby": "7.5.0-beta.2",
-    "@ninetailed/experience.js-plugin-google-tagmanager": "7.5.0-beta.2",
-    "@ninetailed/experience.js-plugin-insights": "7.5.0-beta.2",
-    "@ninetailed/experience.js-plugin-preview": "7.5.0-beta.2",
-    "@ninetailed/experience.js-plugin-privacy": "7.5.0-beta.2",
-    "@ninetailed/experience.js-utils": "7.5.0-beta.2",
+    "@ninetailed/experience.js-gatsby": "7.6.0-beta.1",
+    "@ninetailed/experience.js-plugin-google-tagmanager": "7.6.0-beta.1",
+    "@ninetailed/experience.js-plugin-insights": "7.6.0-beta.1",
+    "@ninetailed/experience.js-plugin-preview": "7.6.0-beta.1",
+    "@ninetailed/experience.js-plugin-privacy": "7.6.0-beta.1",
+    "@ninetailed/experience.js-utils": "7.6.0-beta.1",
     "add": "^2.0.6",
     "cookie": "^0.6.0",
     "cookie-parser": "^1.4.6",

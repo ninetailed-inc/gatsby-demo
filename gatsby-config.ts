@@ -1,6 +1,7 @@
 import type { GatsbyConfig } from "gatsby";
 import netlifyAdapter from "gatsby-adapter-netlify";
 import { ExperienceConfiguration } from "@ninetailed/experience.js-gatsby";
+import type { NinetailedInstance } from "@ninetailed/experience.js";
 import {
   audienceQuery,
   audienceMapper,
@@ -46,7 +47,7 @@ const config: GatsbyConfig = {
       options: {
         clientId: process.env.NINETAILED_CLIENT_ID,
         environment: process.env.NINETAILED_ENV || "main",
-        onInitProfileId: (profileId?: string) => {
+        onInitProfileId: async (profileId?: string) => {
           if (profileId) {
             return profileId;
           }
@@ -61,29 +62,54 @@ const config: GatsbyConfig = {
             }, {});
           return cookieObject["_ga"];
         },
-        ninetailedPlugins: [
-          {
-            resolve: `@ninetailed/experience.js-plugin-preview`,
-            name: "@ninetailed/experience.js-plugin-preview",
-            options: {
-              customOptions: {
-                audienceQuery,
-                experienceQuery,
-                audienceMapper,
-                experienceMapper,
-              },
+        onRouteChange: (
+          { isInitialRoute, url }: { isInitialRoute: boolean; url: string },
+          ninetailed: NinetailedInstance
+        ) => {
+          if (isInitialRoute) {
+            const params = new URL(url).searchParams;
+            const experienceId = params.get("experienceId");
+            const variantIndex = parseInt(params.get("variantIndex") || "", 10);
 
-              // Callback to handle user forwarding to the experience entry
-              // in your CMS  - optional
-              onOpenExperienceEditor: (experience: ExperienceConfiguration) => {
-                // TODO: For now, hard code your space ID and environment ID rather than trying to pull them from .env variables
-                window.open(
-                  `https://app.contentful.com/spaces/[YOUR_CONETNTFUL_SPACE_ID]/environments/[YOUR_CONTENTFUL_ENVIRONMENT_ID]/entries/${experience.id}`,
-                  "_blank"
-                );
-              },
-            },
-          },
+            if (experienceId && variantIndex) {
+              ninetailed.batch([
+                ninetailed.eventBuilder.component(
+                  "componentId",
+                  experienceId,
+                  variantIndex
+                ),
+                ninetailed.eventBuilder.page(),
+              ]);
+            } else {
+              ninetailed.page();
+            }
+          } else {
+            ninetailed.page();
+          }
+        },
+        ninetailedPlugins: [
+          // {
+          //   resolve: `@ninetailed/experience.js-plugin-preview`,
+          //   name: "@ninetailed/experience.js-plugin-preview",
+          //   options: {
+          //     customOptions: {
+          //       audienceQuery,
+          //       experienceQuery,
+          //       audienceMapper,
+          //       experienceMapper,
+          //     },
+
+          //     // Callback to handle user forwarding to the experience entry
+          //     // in your CMS  - optional
+          //     onOpenExperienceEditor: (experience: ExperienceConfiguration) => {
+          //       // TODO: For now, hard code your space ID and environment ID rather than trying to pull them from .env variables
+          //       window.open(
+          //         `https://app.contentful.com/spaces/[YOUR_CONETNTFUL_SPACE_ID]/environments/[YOUR_CONTENTFUL_ENVIRONMENT_ID]/entries/${experience.id}`,
+          //         "_blank"
+          //       );
+          //     },
+          //   },
+          // },
           {
             resolve: `@ninetailed/experience.js-plugin-google-tagmanager`,
             name: "@ninetailed/experience.js-plugin-google-tagmanager",
